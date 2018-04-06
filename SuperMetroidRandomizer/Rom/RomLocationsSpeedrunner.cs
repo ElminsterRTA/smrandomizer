@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using SuperMetroidRandomizer.Random;
@@ -18,7 +18,7 @@ namespace SuperMetroidRandomizer.Rom
                        {
                            new Location
                                {
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,  
                                    Region = Region.Crateria,
                                    Name = "Power Bomb (Crateria surface)",
@@ -34,72 +34,74 @@ namespace SuperMetroidRandomizer.Rom
                                { 
                                    GravityOkay = false,
                                    Region = Region.Crateria,
-                                   Name = "Missile (outside Wrecked Ship bottom)",
+                                   Name = "Missile (Crateria depths bottom)",
                                    Address = 0x781E8,
                                    CanAccess =
                                        have =>
-                                       CanAccessWs(have),
+                                       CanAccessEastMaridia(have),
                                },
                            new Location
                                {     
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,                                   
                                    Region = Region.Crateria,
-                                   Name = "Missile (outside Wrecked Ship top)",
+                                   Name = "Spring Ball",
                                    Address = 0x781EE,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       CanDefeatPhantoon(have),
+                                       CanAccessEastMaridia(have)
+									   && have.Contains(ItemType.SuperMissile),
                                },
                            new Location
                                {       
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,  
                                    Region = Region.Crateria,
-                                   Name = "Missile (outside Wrecked Ship middle)",
+                                   Name = "Missile (Crateria depths top)",
                                    Address = 0x781F4,
                                    CanAccess =
                                        have =>
-                                       CanDefeatPhantoon(have),
+                                       CanAccessEastMaridia(have),
                                },
                            new Location
                                {        
                                    NoHidden = true,
                                    GravityOkay = false,   
                                    Region = Region.Crateria,
-                                   Name = "Missile (Crateria moat)",
+                                   Name = "Missile (Crateria depths moat)",
                                    Address = 0x78248,
                                    CanAccess =
                                        have =>
                                        have.Contains(ItemType.SuperMissile) 
-                                       && CanUsePowerBombs(have),
+                                       && CanAccessEastMaridia(have),
                                },
                            new Location
                                {       
                                    NoHidden = true,
                                    GravityOkay = false,    
                                    Region = Region.Crateria,
-                                   Name = "Energy Tank (Crateria gauntlet)",
+                                   Name = "Missile (Crateria depths gauntlet)",
                                    Address = 0x78264,
                                    CanAccess =
                                        have =>
-                                       CanEnterAndLeaveGauntlet(have)
+                                       CanAccessEastMaridia(have)
                                },
                            new Location
                                {        
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,    
                                    Region = Region.Crateria,
-                                   Name = "Missile (Crateria bottom)",
+                                   Name = "Missile (Crateria old MB)",
                                    Address = 0x783EE,
                                    CanAccess =
                                        have =>
-                                       CanDestroyBombWalls(have),
+                                       CanDestroyBombWalls(have)
+									   && have.Contains(ItemType.MorphingBall),
                                },
                            new Location
                                {        
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,    
                                    Region = Region.Crateria,
                                    Name = "Bomb",
@@ -115,186 +117,168 @@ namespace SuperMetroidRandomizer.Rom
                                    NoHidden = true,
                                    GravityOkay = false,   
                                    Region = Region.Crateria,
-                                   Name = "Energy Tank (Crateria tunnel to Brinstar)",
+                                   Name = "Energy Tank (Crateria tourminator)",
                                    Address = 0x78432,
                                    CanAccess =
                                        have =>
-                                       CanDestroyBombWalls(have) 
-                                       || have.Contains(ItemType.SpeedBooster),
+                                       CanAccessEastMaridia(have),
                                },
                            new Location
                                {       
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,   
                                    Region = Region.Crateria,
                                    Name = "Missile (Crateria gauntlet right)",
                                    Address = 0x78464,
                                    CanAccess =
                                        have =>
-                                       CanEnterAndLeaveGauntlet(have) 
-                                       && CanPassBombPassages(have)
+                                       CanAccessEastMaridia(have)
                                },
                            new Location
                                {     
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,   
                                    Region = Region.Crateria,
                                    Name = "Missile (Crateria gauntlet left)",
                                    Address = 0x7846A,
                                    CanAccess =
                                        have =>
-                                       CanEnterAndLeaveGauntlet(have) 
-                                       && CanPassBombPassages(have)
+                                       CanAccessEastMaridia(have)
                                },
                            new Location
                                {     
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,    
                                    Region = Region.Crateria,
-                                   Name = "Super Missile (Crateria)",
+                                   Name = "Missile (Crateria boyons)",
                                    Address = 0x78478,
                                    CanAccess =
                                        have =>
-                                       CanUsePowerBombs(have)
-                                       && have.Contains(ItemType.SpeedBooster) 
-                                       && (have.Contains(ItemType.EnergyTank) 
-                                           || have.Contains(ItemType.VariaSuit) 
-                                           || have.Contains(ItemType.GravitySuit)),
+                                       CanAccessEastMaridia(have),
                                },
                            new Location
                                {       
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,     
                                    Region = Region.Crateria,
-                                   Name = "Missile (Crateria middle)",
+                                   Name = "Missile (Crateria dental plan)",
                                    Address = 0x78486,
                                    CanAccess =
                                        have =>
-                                       CanPassBombPassages(have),
+                                       CanPassBombPassages(have)
+									   && CanOpenMissileDoors(have),
                                },
                            new Location
                                {        
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,
                                    Region = Region.Brinstar,
-                                   Name = "Power Bomb (green Brinstar bottom)",
+                                   Name = "Super Missile (Brinstar etecoons)",
                                    Address = 0x784AC,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have => 
-                                       CanUsePowerBombs(have),
+                                       CanAccessBlueBrinstar(have)
+									   && have.Contains(ItemType.SuperMissile),
                                },
                            new Location
                                {        
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,  
                                    Region = Region.Brinstar,
-                                   Name = "Super Missile (pink Brinstar)",
+                                   Name = "Missile (Brinstar shinespark shaft)",
                                    Address = 0x784E4,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanPassBombPassages(have) 
-                                       && have.Contains(ItemType.SuperMissile),
+                                       CanAccessGreenBrinstar(have)
+									   && have.Contains(ItemType.WaveBeam),
                                },
                            new Location
                                {            
                                    NoHidden = true,
                                    GravityOkay = false, 
                                    Region = Region.Brinstar,
-                                   Name = "Missile (green Brinstar below super missile)",
+                                   Name = "Missile (Speed Booster)",
                                    Address = 0x78518,
                                    CanAccess =
                                        have =>
-                                       CanPassBombPassages(have) 
-                                       && CanOpenMissileDoors(have),
+                                       CanDestroyBombWalls(have) 
+                                       && CanAccessGreenBrinstar(have),
                                },
                            new Location
                                {            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,   
                                    Region = Region.Brinstar,
-                                   Name = "Super Missile (green Brinstar top)",
+                                   Name = "Speed Booster",
                                    Address = 0x7851E,
                                    CanAccess =
                                        have =>
-                                       CanDestroyBombWalls(have) 
-                                       && CanOpenMissileDoors(have) 
-                                       && (have.Contains(ItemType.SpeedBooster) 
-                                           || have.Contains(ItemType.SpeedBooster)),
+                                       CanDestroyBombWalls(have)
+									   && CanAccessGreenBrinstar(have),
                                },
                            new Location
                                {           
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,   
                                    Region = Region.Brinstar,
-                                   Name = "Reserve Tank (Brinstar)",
+                                   Name = "Super Missile (Brinstar reserve)",
                                    Address = 0x7852C,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanDestroyBombWalls(have) 
-                                       && CanOpenMissileDoors(have) 
-                                       && (have.Contains(ItemType.SpeedBooster) 
-                                           || have.Contains(ItemType.SpeedBooster)),
+                                       CanPassSidehopperGate(have),
                                },
                            new Location
                                {            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,   
                                    Region = Region.Brinstar,
-                                   Name = "Missile (green Brinstar behind missile)",
-                                   Address = 0x78532,
+                                   Name = "Missile (Brinstar construction zone)",
+                                   Address = 0x7877E,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       CanPassBombPassages(have) 
-                                       && CanOpenMissileDoors(have) 
-                                       && have.Contains(ItemType.SpeedBooster),
+                                       CanAccessRedBrinstar(have),
                                },
                            new Location
                                {             
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,  
                                    Region = Region.Brinstar,
-                                   Name = "Missile (green Brinstar behind reserve tank)",
+                                   Name = "Missile (Brinstar reserve)",
                                    Address = 0x78538,
                                    CanAccess =
                                        have =>
-                                       CanDestroyBombWalls(have) 
-                                       && CanOpenMissileDoors(have) 
-                                       && have.Contains(ItemType.SpeedBooster)
-                                       && have.Contains(ItemType.MorphingBall),
+                                       CanPassSidehopperGate(have),
                                },
                            new Location
                                {             
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,    
                                    Region = Region.Brinstar,
-                                   Name = "Missile (pink Brinstar top)",
+                                   Name = "Missile (Brinstar big pink top)",
                                    Address = 0x78608,
                                    CanAccess =
                                        have =>
-                                       (CanDestroyBombWalls(have) 
-                                           && CanOpenMissileDoors(have))
-                                       || CanUsePowerBombs(have),
+                                       CanAccessGreenBrinstar(have),
                                },
                            new Location
                                {            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,    
                                    Region = Region.Brinstar,
-                                   Name = "Missile (pink Brinstar bottom)",
+                                   Name = "Missile (Brinstar big pink bottom)",
                                    Address = 0x7860E,
                                    CanAccess =
                                        have =>
-                                       (CanDestroyBombWalls(have) 
-                                           && CanOpenMissileDoors(have))
-                                       || CanUsePowerBombs(have),
+                                       CanAccessGreenBrinstar(have)
+									   && CanDestroyBombWalls(have),
                                },
                            new Location
                                {             
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,      
                                    Region = Region.Brinstar,
                                    Name = "Charge Beam",
@@ -302,34 +286,34 @@ namespace SuperMetroidRandomizer.Rom
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       (CanPassBombPassages(have) 
-                                           && CanOpenMissileDoors(have))
-                                       || CanUsePowerBombs(have),
+                                       CanAccessGreenBrinstar(have),
                                },
                            new Location
                                {            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,     
                                    Region = Region.Brinstar,
-                                   Name = "Power Bomb (pink Brinstar)",
+                                   Name = "Power Bomb (Brinstar mission impossible)",
                                    Address = 0x7865C,
                                    CanAccess =
                                        have =>
                                        CanUsePowerBombs(have) 
-                                       && have.Contains(ItemType.SuperMissile),
+                                       && CanAccessGreenBrinstar(have),
                                },
                            new Location
                                {           
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,    
                                    Region = Region.Brinstar,
-                                   Name = "Missile (green Brinstar pipe)",
+                                   Name = "Hi-Jump Boots",
                                    Address = 0x78676,
                                    CanAccess =
                                        have =>
-                                       (CanPassBombPassages(have) 
-                                           && have.Contains(ItemType.SuperMissile))
-                                       || CanUsePowerBombs(have),
+                                       CanAccessRedBrinstar(have)
+									   && (have.Contains(ItemType.HiJumpBoots)
+									   || have.Contains(ItemType.SpaceJump)
+									   || have.Contains(ItemType.SpeedBooster)
+									   || CanIbj(have)),
                                },
                            new Location
                                {           
@@ -344,30 +328,35 @@ namespace SuperMetroidRandomizer.Rom
                                },
                            new Location
                                {              
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,      
                                    Region = Region.Brinstar,
                                    Name = "Power Bomb (blue Brinstar)",
                                    Address = 0x7874C,
                                    CanAccess =
                                        have => 
-                                       CanUsePowerBombs(have),
+                                       CanAccessBlueBrinstar(have)
+									   && CanPassBombPassages(have),
                                },
                            new Location
                                {              
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,    
                                    Region = Region.Brinstar,
-                                   Name = "Missile (blue Brinstar middle)",
+                                   Name = "Missile (Brinstar blue middle)",
                                    Address = 0x78798,
                                    CanAccess =
                                        have =>
-                                       CanOpenMissileDoors(have) 
-                                       && have.Contains(ItemType.MorphingBall),
+                                       have.Contains(ItemType.MorphingBall)
+									   && (CanIbj(have)
+									   || have.Contains(ItemType.SpeedBooster)
+									   || (CanUsePowerBombs(have)
+											&& (have.Contains(ItemType.HiJumpBoots)
+											|| have.Contains(ItemType.SpaceJump)))),
                                },
                            new Location
                                {            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,   
                                    Region = Region.Brinstar,
                                    Name = "Energy Tank (blue Brinstar)",
@@ -375,50 +364,50 @@ namespace SuperMetroidRandomizer.Rom
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       CanOpenMissileDoors(have) 
+                                       have.Contains(ItemType.MorphingBall) 
                                },
                            new Location
                                {            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,  
                                    Region = Region.Brinstar,
-                                   Name = "Energy Tank (green Brinstar bottom)",
+                                   Name = "Missile (Brinstar beetoms)",
                                    Address = 0x787C2,
                                    CanAccess =
                                        have => 
-                                       CanUsePowerBombs(have),
+                                       CanPassSidehopperGate(have),
                                },
                            new Location
                                {            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,    
                                    Region = Region.Brinstar,
-                                   Name = "Super Missile (green Brinstar bottom)",
+                                   Name = "Reserve Tank (Brinstar)",
                                    Address = 0x787D0,
                                    CanAccess =
                                        have =>
-                                       CanUsePowerBombs(have) 
-                                       && have.Contains(ItemType.SuperMissile),
+                                       CanPassSidehopperGate(have),
                                },
                            new Location
                                {          
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,    
                                    Region = Region.Brinstar,
-                                   Name = "Energy Tank (pink Brinstar bottom)",
+                                   Name = "Energy Tank (Brinstar waterway)",
                                    Address = 0x787FA,
                                    CanAccess =
                                        have =>
-                                       CanUsePowerBombs(have) 
-                                       && CanOpenMissileDoors(have)
-                                       && have.Contains(ItemType.SpeedBooster) 
+                                       CanAccessBlueBrinstar(have)
+									   && have.Contains(ItemType.SuperMissile)
+									   && have.Contains(ItemType.GravitySuit)
+									   && have.Contains(ItemType.SpeedBooster) 
                                },
                            new Location
                                {            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,    
                                    Region = Region.Brinstar,
-                                   Name = "Missile (blue Brinstar bottom)",
+                                   Name = "Missile (Brinstar first)",
                                    Address = 0x78802,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess = 
@@ -427,106 +416,98 @@ namespace SuperMetroidRandomizer.Rom
                                },
                            new Location
                                {             
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,     
                                    Region = Region.Brinstar,
-                                   Name = "Energy Tank (pink Brinstar top)",
+                                   Name = "Energy Tank (Speed Booster)",
                                    Address = 0x78824,
                                    CanAccess =
                                        have =>
-                                       CanUsePowerBombs(have) 
-                                       && (have.Contains(ItemType.WaveBeam) 
-                                           || have.Contains(ItemType.SuperMissile)),
+                                       CanAccessGreenBrinstar(have),
                                },
                            new Location
                                {           
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,    
                                    Region = Region.Brinstar,
-                                   Name = "Missile (blue Brinstar top)",
+                                   Name = "Missile (Brinstar Billy Mays)",
                                    Address = 0x78836,
                                    CanAccess =
                                        have =>
-                                       CanOpenMissileDoors(have) 
-                                       && CanUsePowerBombs(have) 
+                                       CanAccessBlueBrinstar(have)
+										&& CanOpenMissileDoors(have)
                                },
                            new Location
                                {           
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,   
                                    Region = Region.Brinstar,
-                                   Name = "Missile (blue Brinstar behind missile)",
+                                   Name = "Energy Tank (Brinstar Billy Mays)",
                                    Address = 0x7883C,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       CanOpenMissileDoors(have) 
-                                       && CanUsePowerBombs(have) 
+                                       CanAccessBlueBrinstar(have)
+										&& CanOpenMissileDoors(have)
                                },
                            new Location
                                {           
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,      
                                    Region = Region.Brinstar,
-                                   Name = "X-Ray Visor",
+                                   Name = "Super Missile (X-Ray Scope)",
                                    Address = 0x78876,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
                                        CanAccessRedBrinstar(have) 
-                                       && CanUsePowerBombs(have) 
-                                       && (have.Contains(ItemType.GrappleBeam) 
-                                           || have.Contains(ItemType.SpaceJump) 
-                                           || have.Contains(ItemType.IceBeam)),
+                                       && CanUsePowerBombs(have),
                                },
                            new Location
                                {           
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,            
-                                   Region = Region.Brinstar,
-                                   Name = "Power Bomb (red Brinstar sidehopper room)",
+                                   Region = Region.Maridia,
+                                   Name = "Power Bomb (Maridia beta)",
                                    Address = 0x788CA,
                                    CanAccess =
                                        have =>
-                                       CanAccessRedBrinstar(have) 
-                                       && CanUsePowerBombs(have), 
+                                       CanAccessEastMaridia(have)
+									   && have.Contains(ItemType.SuperMissile), 
                                },
                            new Location
                                {            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,        
                                    Region = Region.Brinstar,
-                                   Name = "Power Bomb (red Brinstar spike room)",
+                                   Name = "Power Bomb (Maridia alpha)",
                                    Address = 0x7890E,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanAccessRedBrinstar(have) 
-                                       && CanUsePowerBombs(have), 
+                                       CanAccessEastMaridia(have), 
                                },
                            new Location
                                {              
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,     
-                                   Region = Region.Brinstar,
-                                   Name = "Missile (red Brinstar spike room)",
-                                   Address = 0x78914,
+                                   Region = Region.LowerNorfair,
+                                   Name = "Missile (Lower Norfair kihunters)",
+                                   Address = 0x7902E,
                                    CanAccess =
                                        have =>
-                                       CanAccessRedBrinstar(have) 
-                                       && CanUsePowerBombs(have), 
+                                       CanPassGoldStatue(have), 
                                },
                            new Location
                                {            
                                    GravityOkay = false, 
                                    Region = Region.Brinstar,
-                                   Name = "Spazer",
+                                   Name = "Wave Beam",
                                    Address = 0x7896E,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanAccessRedBrinstar(have) 
-                                       && CanPassBombPassages(have)
+                                       CanAccessNorfair(have)
                                },
                            new Location
                                {           
@@ -541,7 +522,7 @@ namespace SuperMetroidRandomizer.Rom
                                },
                            new Location
                                {           
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,  
                                    Region = Region.Brinstar,
                                    Name = "Missile (Kraid)",
@@ -549,36 +530,40 @@ namespace SuperMetroidRandomizer.Rom
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       CanAccessKraid(have)
-                                       && CanUsePowerBombs(have),
+                                       CanAccessKraid(have),
                                },
                            new Location
                                {            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,  
                                    Region = Region.Brinstar,
-                                   Name = "Varia Suit",
+                                   Name = "Gravity Suit",
                                    Address = 0x78ACA,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanAccessKraid(have),
+                                       CanAccessKraid(have)
+									   && (have.Contains(ItemType.SpeedBooster)
+										|| have.Contains(ItemType.GrappleBeam)
+										|| have.Contains(ItemType.SpaceJump)
+										|| CanIbj(have)),
                                },
                            new Location
                                {              
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "Missile (lava room)",
+                                   Name = "Missile (Norfair cathedral)",
                                    Address = 0x78AE4,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       CanAccessHeatedNorfair(have),
+                                       CanAccessHeatedNorfair(have)
+									   && have.Contains(ItemType.SpeedBooster),
                                },
                            new Location
                                {                    
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
                                    Name = "Ice Beam",
@@ -586,30 +571,23 @@ namespace SuperMetroidRandomizer.Rom
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanAccessKraid(have)
-                                       && (have.Contains(ItemType.GravitySuit) 
-                                           || have.Contains(ItemType.VariaSuit) 
-                                           || EnergyReserveCount(have) >= 2)
+                                       CanAccessHeatedNorfair(have)
                                },
                            new Location
                                {                  
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "Missile (below Ice Beam)",
+                                   Name = "Missile (Ice Beam)",
                                    Address = 0x78B46,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       CanAccessKraid(have)
-                                       && CanUsePowerBombs(have)
-                                       && (have.Contains(ItemType.GravitySuit) 
-                                           || have.Contains(ItemType.VariaSuit) 
-                                           || EnergyReserveCount(have) >= 3)
+                                       CanAccessHeatedNorfair(have)
                                },
                            new Location
                                {                   
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
                                    Name = "Energy Tank (Crocomire)",
@@ -620,57 +598,54 @@ namespace SuperMetroidRandomizer.Rom
                                },
                            new Location
                                {                    
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,  
                                    Region = Region.Norfair,
-                                   Name = "Hi-Jump Boots",
+                                   Name = "Super Missile (Norfair first)",
                                    Address = 0x78BAC,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanAccessRedBrinstar(have), 
+                                       CanAccessNorfair(have), 
                                },
                            new Location
                                {                   
                                    NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "Missile (above Crocomire)",
+                                   Name = "Missile (Norfair viola gate)",
                                    Address = 0x78BC0,
                                    CanAccess =
                                        have =>
                                        CanAccessCrocomire(have)
-                                       && (have.Contains(ItemType.SpaceJump) 
-                                           || have.Contains(ItemType.GrappleBeam)
-                                           || (have.Contains(ItemType.HiJumpBoots) 
-                                               && have.Contains(ItemType.SpeedBooster))
-                                           || CanIbj(have)),
+									   && CanUsePowerBombs(have)
+                                       && have.Contains(ItemType.WaveBeam),
                                },
                            new Location
                                {                   
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,  
-                                   Region = Region.Norfair,
-                                   Name = "Missile (Hi-Jump Boots)",
-                                   Address = 0x78BE6,
+                                   Region = Region.Brinstar,
+                                   Name = "Missile (post-Spore Spawn)",
+                                   Address = 0x7895A,
                                    CanAccess =
                                        have =>
-                                       CanAccessRedBrinstar(have), 
+                                       CanAccessNorfair(have), 
                                },
                            new Location
                                {                    
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,  
                                    Region = Region.Norfair,
-                                   Name = "Energy Tank (Hi-Jump Boots)",
+                                   Name = "Energy Tank (Super Missile)",
                                    Address = 0x78BEC,
                                    CanAccess =
                                        have =>
-                                       CanAccessRedBrinstar(have), 
+                                       CanAccessNorfair(have), 
                                },
                            new Location
                                {                    
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
                                    Name = "Power Bomb (Crocomire)",
@@ -681,65 +656,56 @@ namespace SuperMetroidRandomizer.Rom
                                },
                            new Location
                                {                    
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "Missile (below Crocomire)",
+                                   Name = "Missile (Norfair acid tide)",
                                    Address = 0x78C14,
+                                   CanAccess =
+                                       have =>
+                                       CanAccessCrocomire(have)
+									   && (have.Contains(ItemType.GrappleBeam)
+									   || have.Contains(ItemType.GravitySuit)),
+                               },
+                           new Location
+                               {                   
+                                   NoHidden = true,
+                                   GravityOkay = true,  
+                                   Region = Region.Norfair,
+                                   Name = "Missile (post-Crocomire)",
+                                   Address = 0x78C2A,
                                    CanAccess =
                                        have =>
                                        CanAccessCrocomire(have),
                                },
                            new Location
-                               {                   
-                                   NoHidden = false,
-                                   GravityOkay = true,  
-                                   Region = Region.Norfair,
-                                   Name = "Missile (Grapple Beam)",
-                                   Address = 0x78C2A,
-                                   CanAccess =
-                                       have =>
-                                       CanAccessCrocomire(have)
-                                       && (have.Contains(ItemType.SpaceJump) 
-                                           || have.Contains(ItemType.GrappleBeam) 
-                                           || have.Contains(ItemType.SpeedBooster) 
-                                           || CanIbj(have)),
-                               },
-                           new Location
                                {                     
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "Grapple Beam",
+                                   Name = "Power Bomb (Norfair first)",
                                    Address = 0x78C36,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanAccessCrocomire(have)
-                                       && (have.Contains(ItemType.SpaceJump) 
-                                           || have.Contains(ItemType.SpeedBooster)
-                                           || CanIbj(have)
-                                           || have.Contains(ItemType.IceBeam)),
+                                       CanAccessCrocomire(have),
                                },
                            new Location
                                {                  
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "Reserve Tank (Norfair)",
+                                   Name = "Energy Tank (Norfair reserve)",
                                    Address = 0x78C3E,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanAccessHeatedNorfair(have) 
-                                       && (have.Contains(ItemType.SpaceJump) 
-                                           || have.Contains(ItemType.GrappleBeam)
-                                           || have.Contains(ItemType.HiJumpBoots)
-                                           || CanIbj(have)),
+                                       CanAccessCrocomire(have)
+									   && CanUsePowerBombs(have),
                                },
                            new Location
                                {                  
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
                                    Name = "Missile (Norfair Reserve Tank)",
@@ -747,181 +713,179 @@ namespace SuperMetroidRandomizer.Rom
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       CanAccessHeatedNorfair(have) 
-                                       && (have.Contains(ItemType.SpaceJump) 
-                                           || have.Contains(ItemType.GrappleBeam)
-                                           || have.Contains(ItemType.HiJumpBoots)
-                                           || CanIbj(have)),
+                                       CanAccessCrocomire(have)
+									   && CanUsePowerBombs(have)
                                },
                            new Location
                                {                 
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "Missile (bubble Norfair green door)",
+                                   Name = "Missile (Norfair pre-reserve)",
                                    Address = 0x78C52,
                                    CanAccess =
                                        have =>
-                                       CanAccessHeatedNorfair(have) 
-                                       && (have.Contains(ItemType.SpaceJump) 
-                                           || have.Contains(ItemType.GrappleBeam)
-                                           || have.Contains(ItemType.HiJumpBoots)
-                                           || CanIbj(have)),
+                                       CanAccessCrocomire(have)
+									   && CanUsePowerBombs(have),
                                },
                            new Location
                                {                       
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "Missile (bubble Norfair)",
+                                   Name = "Missile (pre-Crocomire)",
                                    Address = 0x78C66,
                                    CanAccess =
                                        have =>
-                                       CanAccessHeatedNorfair(have), 
+                                       CanAccessCrocomire(have), 
                                },
                            new Location
                                {                     
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "Missile (Speed Booster)",
+                                   Name = "Missile (Norfair speed hall)",
                                    Address = 0x78C74,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       CanAccessHeatedNorfair(have), 
+                                       CanAccessCrocomire(have)
+									   && CanUsePowerBombs(have), 
                                },
                            new Location
                                {                     
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "Speed Booster",
+                                   Name = "Grappling Beam",
                                    Address = 0x78C82,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanAccessHeatedNorfair(have), 
+                                       CanAccessCrocomire(have)
+									   && CanUsePowerBombs(have), 
                                },
                            new Location
                                {                      
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "Missile (Wave Beam)",
+                                   Name = "Missile (Super Missile)",
                                    Address = 0x78CBC,
                                    CanAccess =
                                        have =>
-                                       CanAccessHeatedNorfair(have), 
+                                       CanAccessNorfair(have)
+									   && have.Contains(ItemType.SpeedBooster), 
                                },
                            new Location
                                {                     
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Norfair,
-                                   Name = "Wave Beam",
+                                   Name = "Spazer",
                                    Address = 0x78CCA,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanAccessHeatedNorfair(have)
+                                       CanAccessCrocomire(have)
+									   && CanUsePowerBombs(have)
                                },
                            new Location
                                {                     
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
                                    Name = "Missile (Gold Torizo)",
                                    Address = 0x78E6E,
                                    CanAccess =
                                        have =>
-                                       CanAccessLowerNorfair(have)
-                                       && have.Contains(ItemType.SpaceJump),
+                                       CanPassGoldStatue(have),
                                },
                            new Location
                                {                     
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
-                                   Name = "Super Missile (Gold Torizo)",
-                                   Address = 0x78E74,
+                                   Name = "Super Missile (Lower Norfair WRITG)",
+                                   Address = 0x78F42,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       CanAccessLowerNorfair(have),
+                                       CanPassGoldStatue(have),
                                },
                            new Location
                                {                         
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
-                                   Name = "Missile (Mickey Mouse room)",
+                                   Name = "Reserve Tank (Lower Norfair)",
                                    Address = 0x78F30,
                                    CanAccess =
                                        have =>
-                                       CanPassWorstRoomInTheGame(have),
+                                       CanPassGoldStatue(have)
+									   && have.Contains(ItemType.SpeedBooster),
                                },
                            new Location
                                {                           
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
-                                   Name = "Missile (lower Norfair above fire flea room)",
+                                   Name = "Power Bomb (Lower Norfair metal pirates)",
                                    Address = 0x78FCA,
                                    CanAccess =
                                        have =>
-                                       CanPassWorstRoomInTheGame(have),
+                                       CanPassGoldStatue(have),
                                },
                            new Location
                                {                             
                                    NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
-                                   Name = "Power Bomb (lower Norfair above fire flea room)",
+                                   Name = "Missile (Lower Norfair top PB)",
                                    Address = 0x78FD2,
                                    CanAccess =
                                        have =>
-                                       CanPassWorstRoomInTheGame(have),
+                                       CanPassGoldStatue(have),
                                },
                            new Location
                                {                         
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
-                                   Name = "Power Bomb (above Ridley)",
+                                   Name = "Missile (Lower Norfair wasteland)",
                                    Address = 0x790C0,
                                    CanAccess =
                                        have =>
-                                       CanPassWorstRoomInTheGame(have),
+                                       CanAccessLowerNorfair(have),
                                },
                            new Location
                                {                            
-                                   NoHidden = false,
-                                   GravityOkay = true,  
-                                   Region = Region.LowerNorfair,
-                                   Name = "Missile (lower Norfair near Wave Beam)",
-                                   Address = 0x79100,
-                                   CanAccess =
-                                       have =>
-                                       CanPassWorstRoomInTheGame(have),
-                               },
-                           new Location
-                               {                         
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
                                    Name = "Energy Tank (Ridley)",
+                                   Address = 0x79100,
+                                   CanAccess =
+                                       have =>
+                                       CanPassGoldStatue(have)
+									   && have.Contains(ItemType.ChargeBeam)
+									   && EnergyReserveCount(have) >= 2,
+                               },
+                           new Location
+                               {                         
+                                   NoHidden = true,
+                                   GravityOkay = true,  
+                                   Region = Region.LowerNorfair,
+                                   Name = "Power Bomb (Lower Norfair WRITG)",
                                    Address = 0x79108,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       CanPassWorstRoomInTheGame(have)
-                                       && have.Contains(ItemType.ChargeBeam)
-                                       && EnergyReserveCount(have) >= 2,
+                                       CanPassGoldStatue(have),
                                },
                            new Location
                                {                        
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
                                    Name = "Screw Attack",
@@ -929,33 +893,35 @@ namespace SuperMetroidRandomizer.Rom
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanAccessLowerNorfair(have),
+                                       CanPassGoldStatue(have),
                                },
                            new Location
                                {                        
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.LowerNorfair,
-                                   Name = "Energy Tank (lower Norfair fire flea room)",
+                                   Name = "Super Missile (Lower Norfair firefleas)",
                                    Address = 0x79184,
                                    CanAccess =
                                        have =>
-                                       CanPassWorstRoomInTheGame(have),
+                                       CanPassGoldStatue(have),
                                },
                            new Location
                                {                         
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = false,  
                                    Region = Region.WreckedShip,
                                    Name = "Missile (Wrecked Ship middle)",
                                    Address = 0x7C265,
                                    CanAccess =
                                        have =>
-                                       CanAccessWs(have),
+                                       CanAccessWs(have)
+									   && have.Contains(ItemType.SpeedBooster)
+									   && EnergyReserveCount(have) >= 1,
                                },
                            new Location
                                {                           
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.WreckedShip,
                                    Name = "Reserve Tank (Wrecked Ship)",
@@ -964,29 +930,25 @@ namespace SuperMetroidRandomizer.Rom
                                    CanAccess =
                                        have =>
                                        CanDefeatPhantoon(have)
-                                       && have.Contains(ItemType.SpeedBooster)
-                                       && (have.Contains(ItemType.VariaSuit)
-                                           || EnergyReserveCount(have) >= 1)
                                },
                            new Location
                                {                           
                                    NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.WreckedShip,
-                                   Name = "Missile (Gravity Suit)",
+                                   Name = "Missile (Varia Suit)",
                                    Address = 0x7C2EF,
                                    CanAccess =
                                        have =>
                                        CanDefeatPhantoon(have)
-                                       && (have.Contains(ItemType.VariaSuit)
-                                           || EnergyReserveCount(have) >= 1)
+                                       && CanDestroyBombWalls(have)
                                },
                            new Location
                                {                          
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.WreckedShip,
-                                   Name = "Missile (Wrecked Ship top)",
+                                   Name = "Missile (Wrecked Ship attic)",
                                    Address = 0x7C319,
                                    CanAccess =
                                        have =>
@@ -994,25 +956,18 @@ namespace SuperMetroidRandomizer.Rom
                                },
                            new Location
                                {                           
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.WreckedShip,
                                    Name = "Energy Tank (Wrecked Ship)",
                                    Address = 0x7C337,
                                    CanAccess =
                                        have =>
-                                       CanDefeatPhantoon(have) 
-                                       && (have.Contains(ItemType.Bomb) 
-                                           || have.Contains(ItemType.PowerBomb)
-                                           || have.Contains(ItemType.GravitySuit)
-                                           || have.Contains(ItemType.HiJumpBoots)
-                                           || have.Contains(ItemType.SpaceJump)
-                                           || have.Contains(ItemType.SpeedBooster)
-                                           || have.Contains(ItemType.SpringBall)),
+                                       CanDefeatPhantoon(have),
                                },
                            new Location
                                {                            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.WreckedShip,
                                    Name = "Super Missile (Wrecked Ship left)",
@@ -1023,7 +978,7 @@ namespace SuperMetroidRandomizer.Rom
                                },
                            new Location
                                {                           
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.WreckedShip,
                                    Name = "Super Missile (Wrecked Ship right)",
@@ -1031,111 +986,103 @@ namespace SuperMetroidRandomizer.Rom
                                    CanAccess =
                                        have =>
                                        CanDefeatPhantoon(have)
+									   && CanPassBombPassages(have)
                                },
                            new Location
                                {                           
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.WreckedShip,
-                                   Name = "Gravity Suit",
+                                   Name = "Varia Suit",
                                    Address = 0x7C36D,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
                                        CanDefeatPhantoon(have)
-                                       && (have.Contains(ItemType.VariaSuit)
-                                           || EnergyReserveCount(have) >= 1)
                                },
                            new Location
                                {                           
                                    NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "Missile (green Maridia shinespark)",
+                                   Name = "Missile (Maridia main street)",
                                    Address = 0x7C437,
                                    CanAccess =
                                        have =>
-                                       CanAccessRedBrinstar(have) 
-                                       && CanUsePowerBombs(have)
-                                       && have.Contains(ItemType.GravitySuit)
-                                       && have.Contains(ItemType.SpeedBooster), 
+                                       CanAccessWestMaridia(have), 
                                },
                            new Location
                                {                             
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "Super Missile (green Maridia)",
+                                   Name = "Energy Tank (Maridia main street)",
                                    Address = 0x7C43D,
                                    CanAccess =
                                        have =>
-                                       CanAccessOuterMaridia(have),
+                                       CanAccessWestMaridia(have)
+									   && CanUsePowerBombs(have),
                                },
                            new Location
                                {                             
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "Energy Tank (green Maridia)",
+                                   Name = "Power Bomb (Maridia tatori)",
                                    Address = 0x7C47D,
                                    CanAccess =
                                        have =>
-                                       CanAccessOuterMaridia(have)
-                                       && (have.Contains(ItemType.SpeedBooster) 
-                                           || have.Contains(ItemType.GrappleBeam) 
-                                           || have.Contains(ItemType.SpaceJump)
-                                           || CanIbj(have)
-                                           || (have.Contains(ItemType.SpaceJump)
-                                               && have.Contains(ItemType.SpringBall))),
+                                       CanAccessDraygon(have),
                                },
                            new Location
                                {                            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "Missile (green Maridia tatori)",
+                                   Name = "Super Missile (Maridia tatori)",
                                    Address = 0x7C483,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       CanAccessOuterMaridia(have),
+                                       CanAccessDraygon(have),
                                },
                            new Location
                                {                             
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "Super Missile (yellow Maridia)",
+                                   Name = "Super Missile (Maridia watering hole)",
                                    Address = 0x7C4AF,
                                    CanAccess =
                                        have =>
-                                       CanAccessInnerMaridia(have),
+                                       CanAccessDraygon(have),
                                },
                            new Location
                                {                             
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "Missile (yellow Maridia super missile)",
+                                   Name = "Missile (Maridia watering hole)",
                                    Address = 0x7C4B5,
                                    CanAccess =
                                        have =>
-                                       CanAccessInnerMaridia(have),
+                                       CanAccessDraygon(have),
                                },
                            new Location
                                {                             
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "Missile (yellow Maridia false wall)",
+                                   Name = "Missile (post-Draygon)",
                                    Address = 0x7C533,
                                    CanAccess =
                                        have =>
-                                       CanAccessInnerMaridia(have),
+                                       CanAccessDraygon(have)
+									   && have.Contains(ItemType.SuperMissile),
                                },
                            new Location
                                {                             
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
                                    Name = "Plasma Beam",
@@ -1143,28 +1090,23 @@ namespace SuperMetroidRandomizer.Rom
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanDefeatDraygon(have)
-                                       && (have.Contains(ItemType.SpeedBooster)
-                                           || ((have.Contains(ItemType.ScrewAttack)
-                                                   || have.Contains(ItemType.PlasmaBeam))
-                                               && (have.Contains(ItemType.SpaceJump)
-                                                   || have.Contains(ItemType.HiJumpBoots)
-                                                   || CanIbj(have)))),
+                                       CanAccessEastMaridia(have)
+									   && have.Contains(ItemType.SuperMissile),
                                },
                            new Location
                                {                             
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "Missile (left Maridia sand pit room)",
+                                   Name = "Missile (Maridia reserve)",
                                    Address = 0x7C5DD,
                                    CanAccess =
                                        have =>
-                                       CanAccessOuterMaridia(have),
+                                       CanAccessEastMaridia(have),
                                },
                            new Location
                                {                            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
                                    Name = "Reserve Tank (Maridia)",
@@ -1172,106 +1114,109 @@ namespace SuperMetroidRandomizer.Rom
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanAccessOuterMaridia(have),
+                                       CanAccessEastMaridia(have),
                                },
                            new Location
                                {                           
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "Missile (right Maridia sand pit room)",
+                                   Name = "Missile (Space Jump)",
                                    Address = 0x7C5EB,
                                    CanAccess =
                                        have =>
-                                       CanAccessOuterMaridia(have),
+                                       CanAccessEastMaridia(have)
+									   && have.Contains(ItemType.SuperMissile),
                                },
                            new Location
                                {                            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "Power Bomb (right Maridia sand pit room)",
+                                   Name = "Space Jump",
                                    Address = 0x7C5F1,
                                    CanAccess =
                                        have =>
-                                       CanAccessOuterMaridia(have)
-                                       && have.Contains(ItemType.GravitySuit),
+                                       CanAccessEastMaridia(have)
+                                       && have.Contains(ItemType.SuperMissile),
                                },
                            new Location
                                {                            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "Missile (pink Maridia)",
+                                   Name = "Missile (pre-Botwoon)",
                                    Address = 0x7C603,
                                    CanAccess =
                                        have =>
-                                       CanAccessOuterMaridia(have)
-                                       && have.Contains(ItemType.GravitySuit)
+                                       CanAccessEastMaridia(have)
+                                       && have.Contains(ItemType.SuperMissile)
                                        && have.Contains(ItemType.SpeedBooster),
                                },
                            new Location
                                {                             
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "Super Missile (pink Maridia)",
+                                   Name = "Super Missile (pre-Botwoon)",
                                    Address = 0x7C609,
                                    CanAccess =
                                        have =>
-                                       CanAccessOuterMaridia(have)
-                                       && have.Contains(ItemType.GravitySuit)
+                                       CanAccessEastMaridia(have)
+                                       && have.Contains(ItemType.SuperMissile)
                                        && have.Contains(ItemType.SpeedBooster),
                                },
                            new Location
                                {                             
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "Spring Ball",
+                                   Name = "X-Ray Scope",
                                    Address = 0x7C6E5,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanAccessOuterMaridia(have)
-                                       && have.Contains(ItemType.GravitySuit)
-                                       && (have.Contains(ItemType.IceBeam) 
-                                           || have.Contains(ItemType.GrappleBeam)),
+                                       CanAccessEastMaridia(have)
+                                       && have.Contains(ItemType.SuperMissile),
                                },
                            new Location
                                {                            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "Missile (Draygon)",
+                                   Name = "Missile (pre-Draygon)",
                                    Address = 0x7C74D,
                                    ItemStorageType = ItemStorageType.Hidden,
                                    CanAccess =
                                        have =>
-                                       CanDefeatBotwoon(have),
+                                       CanAccessDraygon(have)
+									   && have.Contains(ItemType.GrappleBeam)
+									   && have.Contains(ItemType.SuperMissile),
                                },
                            new Location
                                {                             
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "Energy Tank (Botwoon)",
+                                   Name = "Energy Tank (post-Botwoon)",
                                    Address = 0x7C755,
                                    CanAccess =
                                        have =>
-                                       CanDefeatBotwoon(have),
+                                       CanAccessEastMaridia(have)
+									   && have.Contains(ItemType.SuperMissile),
                                },
                            new Location
                                {                            
-                                   NoHidden = false,
+                                   NoHidden = true,
                                    GravityOkay = true,  
                                    Region = Region.Maridia,
-                                   Name = "Space Jump",
+                                   Name = "Energy Tank (Draygon)",
                                    Address = 0x7C7A7,
                                    ItemStorageType = ItemStorageType.Chozo,
                                    CanAccess =
                                        have =>
-                                       CanDefeatDraygon(have),
+                                       CanAccessDraygon(have)
+									   && have.Contains(ItemType.SuperMissile),
                                },
                        };
         }
@@ -1333,34 +1278,48 @@ namespace SuperMetroidRandomizer.Rom
                     || (have.Contains(ItemType.HiJumpBoots)
                         && have.Contains(ItemType.IceBeam)));
         }
+		
+		private bool CanAccessWestMaridia(List<ItemType> have)
+		{
+			return CanAccessBlueBrinstar(have)
+				&& have.Contains(ItemType.GravitySuit)
+		}
+		
+		private bool CanAccessDraygon(List<ItemType> have)
+		{
+			return CanAccessWestMaridia(have)
+				&& have.Contains(ItemType.SpeedBooster)
+		}
 
         private bool CanAccessLowerNorfair(List<ItemType> have)
         {
             return CanAccessHeatedNorfair(have)
                 && have.Contains(ItemType.PowerBomb)
-                && ((have.Contains(ItemType.VariaSuit)
-                        && have.Contains(ItemType.HiJumpBoots))
-                    || have.Contains(ItemType.GravitySuit));
+                && have.Contains(ItemType.GravitySuit)
+				&& have.Contains(ItemType.SuperMissile)
+				&& (have.Contains(ItemType.SpaceJump)
+				|| EnergyReserveCount(have) >= 3);
         }
+		
+		private bool CanPassGoldStatue(List<ItemType> have)
+		{
+			return CanAccessLowerNorfair(have)
+			&& (have.Contains(ItemType.SpeedBooster)
+			|| have.Contains(ItemType.SpaceJump))
+		}
 
         private bool CanAccessCrocomire(List<ItemType> have)
         {
-            return CanAccessHeatedNorfair(have)
-                || (CanAccessKraid(have)
-                    && CanUsePowerBombs(have)
-                    && have.Contains(ItemType.SpeedBooster)
-                    && (have.Contains(ItemType.GravitySuit) 
-                        || have.Contains(ItemType.VariaSuit) 
-                        || EnergyReserveCount(have) >= 3));
+            return CanAccessNorfair(have)
+                && (have.Contains(ItemType.VariaSuit)
+				|| have.Contains(ItemType.GravitySuit));
         }
 
         private bool CanAccessHeatedNorfair(List<ItemType> have)
         {
-            return CanAccessRedBrinstar(have)
-                && (have.Contains(ItemType.SpaceJump) 
-                    || have.Contains(ItemType.HiJumpBoots) 
-                    || CanIbj(have))
-                && (have.Contains(ItemType.VariaSuit) 
+            return CanAccessNorfair(have)
+					&& (CanAccessGreenBrinstar(have)
+					|| have.Contains(ItemType.VariaSuit) 
                     || have.Contains(ItemType.GravitySuit) 
                     || EnergyReserveCount(have) >= 3);
         }
@@ -1374,16 +1333,8 @@ namespace SuperMetroidRandomizer.Rom
 
         private bool CanAccessKraid(List<ItemType> have)
         {
-            return CanAccessRedBrinstar(have)
-                && CanPassBombPassages(have);
-        }
-
-        private bool CanAccessRedBrinstar(List<ItemType> have)
-        {
-            return have.Contains(ItemType.SuperMissile)
-                && ((CanDestroyBombWalls(have) 
-                        && have.Contains(ItemType.MorphingBall)) 
-                    || (CanUsePowerBombs(have)));
+            return CanAccessNorfair(have)
+                && CanUsePowerBombs(have);
         }
 
         private bool CanPassBombPassages(List<ItemType> have)
@@ -1426,14 +1377,62 @@ namespace SuperMetroidRandomizer.Rom
 
         private static bool CanDefeatPhantoon(List<ItemType> have)
         {
-            return CanAccessWs(have);
+            return CanAccessWs(have)
+				&& have.Contains(ItemType.SuperMissile);
         }
+		
+		private static bool CanAccessEastMaridia(List<ItemType> have)
+		{	
+			return have.Contains(ItemType.GravitySuit)
+				&& have.Contains(ItemType.SpeedBooster)
+				&& CanOpenMissileDoors(have)
+				&& CanUsePowerBombs(have);
+		}
 
         private static bool CanAccessWs(List<ItemType> have)
         {
-            return have.Contains(ItemType.SuperMissile)
-                && CanUsePowerBombs(have);
+            return CanAccessGreenBrinstar(have)
+					|| (CanUsePowerBombs(have)
+						&&	(have.Contains(ItemType.VariaSuit) 
+							|| have.Contains(ItemType.GravitySuit) 
+							|| EnergyReserveCount(have) >= 3));
         }
+		
+		private static bool CanAccessBlueBrinstar(List<ItemType> have)
+		{	
+			return (CanDestroyBombWalls(have)
+				&& have.Contains(ItemType.MorphingBall)
+				&& have.Contains(ItemType.SuperMissile))
+				|| CanUsePowerBombs(have);
+		}
+		
+		private static bool CanAccessRedBrinstar(List<ItemType> have)
+		{
+			return (CanOpenMissileDoors(have)
+				&& CanPassBombPassages(have))
+				|| (CanAccessBlueBrinstar(have)
+				&& have.Contains(ItemType.SuperMissile));
+		}
+		
+		private static bool CanAccessGreenBrinstar(List<ItemType> have)
+		{
+			return CanAccessRedBrinstar(have)
+				&& have.Contains(ItemType.SuperMissile)
+				&& have.Contains(ItemType.SpeedBooster);
+		}
+		
+		private static bool CanPassSidehopperGate(List<ItemType> have)
+		{
+			return CanAccessGreenBrinstar(have)
+				&& CanUsePowerBombs(have)
+				&& have.Contains(ItemType.WaveBeam);
+		}
+		
+		private static bool CanAccessNorfair(List<ItemType> have)
+		{
+			return CanAccessRedBrinstar(have)
+				&& have.Contains(ItemType.SuperMissile)
+		}
 
         public RomLocationsSpeedrunner()
         {
